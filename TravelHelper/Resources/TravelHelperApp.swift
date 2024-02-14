@@ -25,7 +25,7 @@ struct TravelHelperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TravelView()
         }
         .modelContainer(sharedModelContainer)
     }

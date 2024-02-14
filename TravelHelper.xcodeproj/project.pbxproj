@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		7E1DF6742B7AD046003A8C7F /* TravelHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6732B7AD046003A8C7F /* TravelHelperApp.swift */; };
-		7E1DF6762B7AD046003A8C7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6752B7AD046003A8C7F /* ContentView.swift */; };
+		7E1DF6762B7AD046003A8C7F /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6752B7AD046003A8C7F /* TravelView.swift */; };
 		7E1DF6782B7AD046003A8C7F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6772B7AD046003A8C7F /* Item.swift */; };
 		7E1DF67A2B7AD048003A8C7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF6792B7AD048003A8C7F /* Assets.xcassets */; };
 		7E1DF67D2B7AD048003A8C7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1DF67C2B7AD048003A8C7F /* Preview Assets.xcassets */; };
 		7E1DF6872B7AD048003A8C7F /* TravelHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6862B7AD048003A8C7F /* TravelHelperTests.swift */; };
 		7E1DF6912B7AD048003A8C7F /* TravelHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6902B7AD048003A8C7F /* TravelHelperUITests.swift */; };
 		7E1DF6932B7AD048003A8C7F /* TravelHelperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6922B7AD048003A8C7F /* TravelHelperUITestsLaunchTests.swift */; };
+		7E1DF6A02B7AD129003A8C7F /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF69F2B7AD129003A8C7F /* OtherView.swift */; };
+		7E1DF6A52B7AD556003A8C7F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6A42B7AD556003A8C7F /* SecondView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,7 @@
 /* Begin PBXFileReference section */
 		7E1DF6702B7AD046003A8C7F /* TravelHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1DF6732B7AD046003A8C7F /* TravelHelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelHelperApp.swift; sourceTree = "<group>"; };
-		7E1DF6752B7AD046003A8C7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7E1DF6752B7AD046003A8C7F /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
 		7E1DF6772B7AD046003A8C7F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		7E1DF6792B7AD048003A8C7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E1DF67C2B7AD048003A8C7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -46,6 +48,8 @@
 		7E1DF68C2B7AD048003A8C7F /* TravelHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1DF6902B7AD048003A8C7F /* TravelHelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelHelperUITests.swift; sourceTree = "<group>"; };
 		7E1DF6922B7AD048003A8C7F /* TravelHelperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelHelperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7E1DF69F2B7AD129003A8C7F /* OtherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
+		7E1DF6A42B7AD556003A8C7F /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 		7E1DF6672B7AD046003A8C7F = {
 			isa = PBXGroup;
 			children = (
+				7E1DF69F2B7AD129003A8C7F /* OtherView.swift */,
 				7E1DF6722B7AD046003A8C7F /* TravelHelper */,
 				7E1DF6852B7AD048003A8C7F /* TravelHelperTests */,
 				7E1DF68F2B7AD048003A8C7F /* TravelHelperUITests */,
@@ -96,10 +101,9 @@
 		7E1DF6722B7AD046003A8C7F /* TravelHelper */ = {
 			isa = PBXGroup;
 			children = (
-				7E1DF6732B7AD046003A8C7F /* TravelHelperApp.swift */,
-				7E1DF6752B7AD046003A8C7F /* ContentView.swift */,
+				7E1DF6A32B7AD3FD003A8C7F /* ViewController */,
 				7E1DF6772B7AD046003A8C7F /* Item.swift */,
-				7E1DF6792B7AD048003A8C7F /* Assets.xcassets */,
+				7E1DF6A22B7AD3C5003A8C7F /* Resources */,
 				7E1DF67B2B7AD048003A8C7F /* Preview Content */,
 			);
 			path = TravelHelper;
@@ -128,6 +132,24 @@
 				7E1DF6922B7AD048003A8C7F /* TravelHelperUITestsLaunchTests.swift */,
 			);
 			path = TravelHelperUITests;
+			sourceTree = "<group>";
+		};
+		7E1DF6A22B7AD3C5003A8C7F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E1DF6792B7AD048003A8C7F /* Assets.xcassets */,
+				7E1DF6732B7AD046003A8C7F /* TravelHelperApp.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7E1DF6A32B7AD3FD003A8C7F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7E1DF6752B7AD046003A8C7F /* TravelView.swift */,
+				7E1DF6A42B7AD556003A8C7F /* SecondView.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,9 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E1DF6762B7AD046003A8C7F /* ContentView.swift in Sources */,
+				7E1DF6762B7AD046003A8C7F /* TravelView.swift in Sources */,
+				7E1DF6A52B7AD556003A8C7F /* SecondView.swift in Sources */,
 				7E1DF6782B7AD046003A8C7F /* Item.swift in Sources */,
 				7E1DF6742B7AD046003A8C7F /* TravelHelperApp.swift in Sources */,
+				7E1DF6A02B7AD129003A8C7F /* OtherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
