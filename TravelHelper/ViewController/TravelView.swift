@@ -1,36 +1,47 @@
-//
-//  TravelView.swift
-//  TravelHelper
-//
-//  Created by Gabby Pierce on 2/12/24.
-//
-
 import SwiftUI
-import SwiftData
 
 struct TravelView: View {
-    
     var body: some View {
-        NavigationStack
-        {
-            VStack
-            {
-//                Image(systemName: "globe")
-//                    .imageScale(.large)
-//                    .foregroundStyle(.tint)
+        NavigationView {
+            VStack {
                 Text("Where to Next?")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
-                    .position(CGPoint(x: 180.0, y: 100.0))
-                NavigationLink("Click Here", destination: SecondView())
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                
+                Spacer()
+                
+                NavigationLink(destination: SecondView()) {
+                    Text("Next Destination")
+                        .font(.largeTitle)
+                        .foregroundColor(.black)
+                }
+                
+                NavigationLink(destination: JournalView()) {
+                    Text("Journal View")
+                        .font(.largeTitle)
+                        .foregroundColor(.black)
+                }
             }
-        .padding()
+            .background(
+                Image("newPhoto") 
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+            )
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            
+        }
+            
         }
     }
+
+struct TravelView_Previews: PreviewProvider {
+    static var previews: some View {
+        TravelView()
+    }
 }
-#Preview
-{
-    TravelView()
-}
-       
