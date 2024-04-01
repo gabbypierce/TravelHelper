@@ -18,6 +18,7 @@
 		7E1DF6A02B7AD129003A8C7F /* OtherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF69F2B7AD129003A8C7F /* OtherView.swift */; };
 		7E1DF6A52B7AD556003A8C7F /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1DF6A42B7AD556003A8C7F /* SecondView.swift */; };
 		7E7A85D22B8D4E9A0082BCE4 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A85D12B8D4E9A0082BCE4 /* JournalView.swift */; };
+		7E7A85D82BA8F4000082BCE4 /* entries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7A85D72BA8F4000082BCE4 /* entries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7E1DF69F2B7AD129003A8C7F /* OtherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherView.swift; sourceTree = "<group>"; };
 		7E1DF6A42B7AD556003A8C7F /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		7E7A85D12B8D4E9A0082BCE4 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		7E7A85D72BA8F4000082BCE4 /* entries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = entries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				7E1DF6752B7AD046003A8C7F /* TravelView.swift */,
 				7E1DF6A42B7AD556003A8C7F /* SecondView.swift */,
 				7E7A85D12B8D4E9A0082BCE4 /* JournalView.swift */,
+				7E7A85D72BA8F4000082BCE4 /* entries.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E7A85D82BA8F4000082BCE4 /* entries.swift in Sources */,
 				7E7A85D22B8D4E9A0082BCE4 /* JournalView.swift in Sources */,
 				7E1DF6762B7AD046003A8C7F /* TravelView.swift in Sources */,
 				7E1DF6A52B7AD556003A8C7F /* SecondView.swift in Sources */,
