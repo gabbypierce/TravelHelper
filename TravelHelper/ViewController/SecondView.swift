@@ -4,60 +4,66 @@
 //
 //  Created by Gabby Pierce on 2/12/24.
 //
-
 import SwiftUI
 
 struct SecondView: View {
-    @State private var searchText = ""
+    @State private var cityName = ""
+    @State private var stateAbbreviation = ""
+    @State private var isLoading = false
+    @State private var errorMessage = ""
+    
+    @ObservedObject var viewModel = SecondViewModel()
     
     var body: some View {
         NavigationView {
             VStack {
-                Text("Other Screen Content")
+                Text("Enter Location")
+                    .font(.title)
                     .padding()
-                Spacer()
-            }
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarItems(leading:
-                                    
-            
-                SearchBar(text: $searchText)
-            )
-        }
-    }
-}
-
-struct SearchBar: View {
-    @Binding var text: String
-    
-    var body: some View {
-        HStack {
-            TextField("Search", text: $text)
-                .padding(7)
-                .padding(.horizontal, 50)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 8)
-                        
-                        if !text.isEmpty {
-                            Button(action: {
-                                self.text = ""
-                            }) {
-                                Image(systemName: "multiply.circle.fill")
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing, 8)
-                            }
+                
+                TextField("City Name", text: $cityName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                TextField("State Abbreviation (e.g., CA)", text: $stateAbbreviation)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                Button(action: {
+                    isLoading = true
+                    errorMessage = ""
+                    viewModel.fetchRestaurants(cityName: cityName, stateAbbreviation: stateAbbreviation) { success, error in
+                        isLoading = false
+                        if let error = error {
+                            errorMessage = "Failed to fetch resturants: \(error.localizedDescription)"
+                        } else if !success {
+                            errorMessage = "No results found."
                         }
                     }
-                )
-                .padding(.horizontal, 25)
-                .foregroundColor(.primary)
-                .autocapitalization(.none)
+                }) {
+                    Text(isLoading ? "Loading..." : "Search")
+                        .foregroundColor(.white)
+                        .frame(width: 200, height: 50)
+                        .background(isLoading ? Color.gray : Color.blue)
+                        .cornerRadius(8)
+                }.disabled(isLoading)
+                
+                Spacer()
+                
+                List(viewModel.restaurants, id: \.id) { restaurant in
+                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
+                        Text(restaurant.restaurantName ?? "Unknown Restaurant")
+                    }
+                }
+            }
+            .navigationBarTitle("Find Restaurants", displayMode: .inline)
+            .padding()
         }
     }
 }
@@ -67,8 +73,4 @@ struct SecondView_Previews: PreviewProvider {
         SecondView()
     }
 }
-
-
-
-
 

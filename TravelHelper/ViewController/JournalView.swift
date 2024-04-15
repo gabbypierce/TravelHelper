@@ -233,5 +233,6 @@ struct JournalView: View {
                 }
             }
         }
+        
     }
 }

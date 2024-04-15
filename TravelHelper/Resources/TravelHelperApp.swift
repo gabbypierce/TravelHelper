@@ -10,6 +10,10 @@ import SwiftData
 
 @main
 struct TravelHelperApp: App {
+    init() {
+           // Set the environment variable for CoreGraphics numeric issues
+           setenv("CG_NUMERICS_SHOW_BACKTRACE", "1", 1)
+       }
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
