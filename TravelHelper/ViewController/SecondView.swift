@@ -4,6 +4,7 @@
 //
 //  Created by Gabby Pierce on 2/12/24.
 //
+
 import SwiftUI
 
 struct SecondView: View {
@@ -11,66 +12,77 @@ struct SecondView: View {
     @State private var stateAbbreviation = ""
     @State private var isLoading = false
     @State private var errorMessage = ""
-    
+
     @ObservedObject var viewModel = SecondViewModel()
-    
+
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Enter Location")
-                    .font(.title)
-                    .padding()
-                
-                TextField("City Name", text: $cityName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                TextField("State Abbreviation (e.g., CA)", text: $stateAbbreviation)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                if !errorMessage.isEmpty {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
+            ZStack {
+                // Background image setup
+                Image("foodnew")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all) // This ensures the image covers the entire screen
+
+                VStack {
+                    Text("Enter Location")
+                        .font(.title)
                         .padding()
-                }
-                
-                Button(action: {
-                    isLoading = true
-                    errorMessage = ""
-                    viewModel.fetchRestaurants(cityName: cityName, stateAbbreviation: stateAbbreviation) { success, error in
-                        isLoading = false
-                        if let error = error {
-                            errorMessage = "Failed to fetch resturants: \(error.localizedDescription)"
-                        } else if !success {
-                            errorMessage = "No results found."
+
+                    TextField("City Name", text: $cityName)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                        .padding()
+                        
+
+                    TextField("State Abbreviation (e.g., CA)", text: $stateAbbreviation)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                        .padding()
+
+                    if !errorMessage.isEmpty {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                    }
+
+                    Button(action: {
+                        isLoading = true
+                        errorMessage = ""
+                        viewModel.fetchRestaurants(cityName: cityName, stateAbbreviation: stateAbbreviation) { success, error in
+                            isLoading = false
+                            if let error = error {
+                                errorMessage = "Failed to fetch restaurants: \(error.localizedDescription)"
+                            } else if !success {
+                                errorMessage = "No results found."
+                            }
+                        }
+                    }) {
+                        Text(isLoading ? "Loading..." : "Search")
+                            .foregroundColor(.white)
+                            .frame(width: 200, height: 50)
+                            .background(isLoading ? Color.gray : Color.blue)
+                            .cornerRadius(8)
+                    }.disabled(isLoading)
+
+                    Spacer()
+
+                    List(viewModel.restaurants, id: \.id) { restaurant in
+                        NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)) {
+                            Text(restaurant.restaurantName ?? "Unknown Restaurant")
                         }
                     }
-                }) {
-                    Text(isLoading ? "Loading..." : "Search")
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 50)
-                        .background(isLoading ? Color.gray : Color.blue)
-                        .cornerRadius(8)
-                }.disabled(isLoading)
-                
-                Spacer()
-                
-                List(viewModel.restaurants, id: \.id) { restaurant in
-                    NavigationLink(destination: RestaurantDetailView(restaurant: restaurant)){
-                        Text(restaurant.restaurantName ?? "Unknown Restaurant")
-                    }
                 }
+                .navigationBarTitle("Find Restaurants", displayMode: .inline)
+                .navigationBarTitleDisplayMode(.inline)
+                .padding()
             }
-            .navigationBarTitle("Find Restaurants", displayMode: .inline)
-            .padding()
+        }
+    }
+
+    struct SecondView_Previews: PreviewProvider {
+        static var previews: some View {
+            SecondView()
         }
     }
 }
-
-struct SecondView_Previews: PreviewProvider {
-    static var previews: some View {
-        SecondView()
-    }
-}
-

@@ -54,7 +54,7 @@ class SecondViewModel: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         // Add your headers here
-        request.setValue("274d42e19cmsh3a6436ed8c04afbp1653f1jsn040500aa06cd", forHTTPHeaderField: "X-RapidAPI-Key")
+        //request.setValue("274d42e19cmsh3a6436ed8c04afbp1653f1jsn040500aa06cd", forHTTPHeaderField: "X-RapidAPI-Key")
         request.setValue("restaurants-near-me-usa.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
                 
 //        let session = URLSession.shared

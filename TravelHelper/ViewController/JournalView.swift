@@ -75,76 +75,47 @@ struct JournalView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("journalImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .edgesIgnoringSafeArea(.all)
-                VStack {
-                    Text("MY JOURNAL ENTRIES")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                    
-                    List {
-                        ForEach(viewModel.entries) { entry in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    if let imageData = entry.imageData, let uiImage = UIImage(data: imageData){
-                                        Image(uiImage: uiImage)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                    Text("Place: \(entry.placeName)")
-                                    Text("Favorite Place: \(entry.favoritePlace)")
-                                    Text("Favorite Memory: \(entry.favoriteMemory)")
+                Color("Background").edgesIgnoringSafeArea(.all)
+                                VStack {
+                                    Text("MY JOURNAL ENTRIES")
+                                        .font(.largeTitle)
+                                        .fontWeight(.bold)
+                                        .padding(.top, 50)
+                                    List {
+                                                            ForEach(viewModel.entries) { entry in
+                                                                JournalEntryCard(entry: entry, editAction: {
+                                                                    self.entryToEdit = entry
+                                                                    self.showingAddEditEntry = true
+                                                                })
+                                                                .padding(.vertical, 5)
+                                                            }
+                                                            .onDelete(perform: deleteItems)
+                                                        }
+                                                        .listStyle(PlainListStyle())
+                                    
+                                    FloatingActionButton(action: {
+                                        self.entryToEdit = nil // for adding a new entry
+                                        self.showingAddEditEntry = true
+                                    })
                                 }
-                                .padding()
-                                
-                                Spacer()
-                                
-                                // Deletion button
-                                Button("Edit") {
-                                    self.entryToEdit = entry
-                                    self.showingAddEditEntry = true
-                                }
-                                .foregroundColor(.blue)
-                                .padding()
                             }
+                            .sheet(isPresented: $showingAddEditEntry) {
+                                AddEditEntryView(entry: self.$entryToEdit) { result in
+                                    if let entry = self.entryToEdit {
+                                        viewModel.updateEntry(result)
+                                    } else {
+                                        viewModel.addEntry(result)
+                                    }
+                                    self.entryToEdit = nil
+                                }
+                            }
+                            .navigationBarHidden(true)
                         }
-                        .onDelete(perform: viewModel.deleteEntry) // If you want to enable swipe to delete as well
                     }
-                    .background(Color.clear)
-                    Button(action: {
-                        self.entryToEdit = nil // for adding a new entry
-                        self.showingAddEditEntry = true
-                    }) {
-                        Image(systemName: "plus")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.black)
-                    }
-                    .padding()
-                }
-            }
-            .sheet(isPresented: $showingAddEditEntry) {
-                AddEditEntryView(entry: self.$entryToEdit) { result in
-                    if let entry = self.entryToEdit {
-                        viewModel.updateEntry(result)
-                    } else {
-                        viewModel.addEntry(result)
-                    }
-                    self.entryToEdit = nil
-                }
-            }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+    private func deleteItems(at offsets: IndexSet) {
+            viewModel.deleteEntry(at: offsets)
         }
     }
-    
-    
     // MARK: - AddEditEntryView
     struct AddEditEntryView: View {
         @Binding var entry: JournalEntry?
@@ -175,8 +146,7 @@ struct JournalView: View {
                             .scaledToFit()
                     }
                     Button("Save") {
-                        let savingEntry = JournalEntry(id: entry?.id ?? UUID(), placeName: placeName, favoritePlace: favoritePlace, favoriteMemory:
-                                                        favoriteMemory, imageData: entryImageData)
+                        let savingEntry = JournalEntry(id: entry?.id ?? UUID(), placeName: placeName, favoritePlace: favoritePlace, favoriteMemory: favoriteMemory, imageData: entryImageData)
                         onSave(savingEntry)
                         presentationMode.wrappedValue.dismiss()
                     }
@@ -188,6 +158,10 @@ struct JournalView: View {
                         placeName = entry.placeName
                         favoritePlace = entry.favoritePlace
                         favoriteMemory = entry.favoriteMemory
+                        
+                        if entryImageData == nil {
+                            entryImageData = entry.imageData
+                        }
                     }
                 }
             }
@@ -234,5 +208,57 @@ struct JournalView: View {
             }
         }
         
+    }
+struct JournalEntryCard: View {
+    var entry: JournalEntry
+    var editAction: () -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            if let imageData = entry.imageData, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(8)
+            }
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Place: \(entry.placeName)")
+                    .fontWeight(.medium)
+                Text("Favorite Place: \(entry.favoritePlace)")
+                Text("Favorite Memory: \(entry.favoriteMemory)")
+            }
+            .padding()
+            
+            HStack {
+                Spacer()
+                Button(action: editAction) {
+                    Label("Edit", systemImage: "pencil")
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding()
+            }
+        }
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(radius: 4)
+    }
+}
+
+// MARK: - FloatingActionButton View
+struct FloatingActionButton: View {
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .foregroundColor(.blue)
+                .padding()
+        }
+        .background(Color.white)
+        .cornerRadius(30)
+        .shadow(radius: 4)
+        .padding()
     }
 }
